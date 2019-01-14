@@ -1,0 +1,25 @@
+diff --git a/4.0/Dockerfile b/4.0/Dockerfile
+index 2c62685..b6e810e 100644
+--- a/4.0/Dockerfile
++++ b/4.0/Dockerfile
+@@ -22,7 +22,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,passenger,ruby,nodejs" \
+       com.redhat.component="rh-passenger40-docker" \
+-      name="centos/passenger-40-centos7" \
++      name="clefos/passenger-40-centos7" \
+       version="$PASSENGER_VERSION" \
+       usage="s2i build file:///your/app centos/passenger-40-centos7 your-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/Makefile b/Makefile
+index 4c9e080..8a13002 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,6 @@
+ # Variables are documented in common/build.sh.
+ BASE_IMAGE_NAME = passenger
+-VERSIONS = 
++VERSIONS = 4.0
+ OPENSHIFT_NAMESPACES = 
+ 
+ # HACK:  Ensure that 'git pull' for old clones doesn't cause confusion.

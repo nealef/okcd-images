@@ -1,0 +1,19 @@
+diff --git a/specs/multispec.yml b/specs/multispec.yml
+index f38d51a..38e3fc9 100644
+--- a/specs/multispec.yml
++++ b/specs/multispec.yml
+@@ -15,13 +15,10 @@ specs:
+       s2i_base: centos/s2i-core-centos7
+       from_tag: "1"
+       install_pkgs: "gettext hostname nss_wrapper bind-utils rh-varnish{{ spec.version }}-varnish gcc"
+-      org: "centos"
++      org: "clefos"
+       prod: "centos7"
+       img_name: "{{ spec.org }}/varnish-{{ spec.version }}-{{ spec.prod }}"
+       repo_setup: yum install -y centos-release-scl-rh && \
+-      staging_repo_setup: >-4
+-          yum-config-manager --add-repo https://cbs.centos.org/repos/sclo7-rh-varnish{{ spec.version }}-rh-candidate/x86_64/os/ && \
+-              echo gpgcheck=0 >> /etc/yum.repos.d/cbs.centos.org_repos_sclo7-rh-varnish{{ spec.version }}-rh-candidate_x86_64_os_.repo && \
+       conf_path: /etc/opt/rh/rh-varnish{{ spec.version }}/varnish
+     rhel7:
+       distros:

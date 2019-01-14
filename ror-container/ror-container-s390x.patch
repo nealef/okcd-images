@@ -1,0 +1,49 @@
+diff --git a/4.2/Dockerfile b/4.2/Dockerfile
+index 2294d21..1206598 100644
+--- a/4.2/Dockerfile
++++ b/4.2/Dockerfile
+@@ -73,7 +73,7 @@ ENV RAILS_VERSION 4.2
+ RUN yum install -y yum-utils && \
+     yum install -y centos-release-scl-rh && \
+     yum-config-manager --enable centos-sclo-rh-testing && \
+-    INSTALL_PKGS="rh-ror42 rh-ruby23-ruby-devel rh-nodejs4" && \
++    INSTALL_PKGS="rh-ror42 rh-ruby23-ruby-devel rh-nodejs6" && \
+     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y
+diff --git a/4.2/root/opt/app-root/etc/scl_enable b/4.2/root/opt/app-root/etc/scl_enable
+index ee70f5e..5550c75 100644
+--- a/4.2/root/opt/app-root/etc/scl_enable
++++ b/4.2/root/opt/app-root/etc/scl_enable
+@@ -3,4 +3,4 @@
+ #
+ # This will make scl collection binaries work out of box.
+ unset BASH_ENV PROMPT_COMMAND ENV
+-source scl_source enable rh-ruby23 rh-ror42 rh-nodejs4
++source scl_source enable rh-ruby23 rh-ror42 rh-nodejs6
+diff --git a/5.0/Dockerfile b/5.0/Dockerfile
+index 3f916ef..a46c494 100644
+--- a/5.0/Dockerfile
++++ b/5.0/Dockerfile
+@@ -11,7 +11,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.description="$DESCRIPTION" \
+       io.k8s.display-name="Ruby on Rails 5.0" \
+       com.redhat.component="rh-ror50-container" \
+-      name="centos/ror-50-centos7" \
++      name="clefos/ror-50-centos7" \
+       version="5.0" \
+       usage="Build own container image and use FROM centos/ror-50-centos7." \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/4.2/test/run b/4.2/test/run
+index 6021c62..71ca244 100755
+--- a/4.2/test/run
++++ b/4.2/test/run
+@@ -86,7 +86,7 @@ run "fgrep 'ruby 2.3' output"
+ run "docker run --rm $IMAGE_NAME /bin/bash -c 'rails -v' > output"
+ run "fgrep 'Rails 4.2' output"
+ run "docker run --rm $IMAGE_NAME /bin/bash -c 'node -v' > output"
+-run "fgrep 'v4.' output"
++run "fgrep 'v6.' output"
+ 
+ # Check Rails welcome page
+ CONTAINER_ARGS="bash -c 'rails new myapp --skip-bundle && cd myapp && sed -i -e \"s/\(gem.*web-console\)/#\1/\" Gemfile && bundle --local && rails s -b 0.0.0.0 -p 8080'"

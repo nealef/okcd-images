@@ -1,0 +1,57 @@
+diff --git a/3.2/Dockerfile b/3.2/Dockerfile
+index d498108..7991b48 100644
+--- a/3.2/Dockerfile
++++ b/3.2/Dockerfile
+@@ -13,7 +13,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="27017:mongodb" \
+       io.openshift.tags="database,mongodb,rh-mongodb32" \
+       com.redhat.component="rh-mongodb32-container" \
+-      name="centos/mongodb-32-centos7" \
++      name="clefos/mongodb-32-centos7" \
+       usage="docker run -d -e MONGODB_ADMIN_PASSWORD=my_pass centos/mongodb-32-centos7" \
+       version="3.2" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/3.4/Dockerfile b/3.4/Dockerfile
+index 719fa47..39ba6d4 100644
+--- a/3.4/Dockerfile
++++ b/3.4/Dockerfile
+@@ -13,7 +13,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="27017:mongodb" \
+       io.openshift.tags="database,mongodb,rh-mongodb34" \
+       com.redhat.component="rh-mongodb34-container" \
+-      name="centos/mongodb-34-centos7" \
++      name="clefos/mongodb-34-centos7" \
+       usage="docker run -d -e MONGODB_ADMIN_PASSWORD=my_pass centos/mongodb-34-centos7" \
+       version="1" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/Makefile b/Makefile
+index a53bd80..b428b1b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,6 @@
+ # Variables are documented in hack/build.sh.
+ BASE_IMAGE_NAME = mongodb
+-VERSIONS = 3.2 3.4 3.6
++VERSIONS = 3.4 3.6
+ OPENSHIFT_NAMESPACES = 2.4
+ 
+ # HACK:  Ensure that 'git pull' for old clones doesn't cause confusion.
+diff --git a/common b/common
+--- a/common
++++ b/common
+@@ -1 +1 @@
+-Subproject commit 45fd8b10d0b10d6a3808a58612fc6de4fb0368a3
++Subproject commit 45fd8b10d0b10d6a3808a58612fc6de4fb0368a3-dirty
+diff --git a/latest/Dockerfile b/latest/Dockerfile
+index 98ddd7c..2ac62d1 100644
+--- a/latest/Dockerfile
++++ b/latest/Dockerfile
+@@ -13,7 +13,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="27017:mongodb" \
+       io.openshift.tags="database,mongodb,rh-mongodb36" \
+       com.redhat.component="rh-mongodb36-container" \
+-      name="centos/mongodb-36-centos7" \
++      name="clefos/mongodb-36-centos7" \
+       usage="docker run -d -e MONGODB_ADMIN_PASSWORD=my_pass centos/mongodb-36-centos7" \
+       version="1" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"

@@ -1,0 +1,26 @@
+diff --git a/5.24/Dockerfile b/5.24/Dockerfile
+index 5529f03..fc3a65a 100644
+--- a/5.24/Dockerfile
++++ b/5.24/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.tags="builder,${NAME},${NAME}${PERL_SHORT_VER}" \
+       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
+       io.s2i.scripts-url="image:///usr/libexec/s2i" \
+-      name="centos/${NAME}-${PERL_SHORT_VER}-centos7" \
++      name="clefos/${NAME}-${PERL_SHORT_VER}-centos7" \
+       com.redhat.component="rh-${NAME}${PERL_SHORT_VER}-container" \
+       version="$PERL_VERSION" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+diff --git a/5.26/Dockerfile b/5.26/Dockerfile
+index 9a8eaec..1a0a3b9 100644
+--- a/5.26/Dockerfile
++++ b/5.26/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.tags="builder,${NAME},${NAME}${PERL_SHORT_VER}" \
+       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
+       io.s2i.scripts-url="image:///usr/libexec/s2i" \
+-      name="centos/${NAME}-${PERL_SHORT_VER}-centos7" \
++      name="clefos/${NAME}-${PERL_SHORT_VER}-centos7" \
+       com.redhat.component="rh-${NAME}${PERL_SHORT_VER}-container" \
+       version="$PERL_VERSION" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \

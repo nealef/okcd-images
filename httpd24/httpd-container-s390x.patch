@@ -1,0 +1,21 @@
+diff --git a/2.4/Dockerfile b/2.4/Dockerfile
+index c270d2e..3f14bfe 100644
+--- a/2.4/Dockerfile
++++ b/2.4/Dockerfile
+@@ -23,7 +23,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.display-name="Apache httpd $HTTPD_VERSION" \
+       io.openshift.expose-services="8080:http,8443:https" \
+       io.openshift.tags="builder,httpd,httpd24" \
+-      name="centos/httpd-24-centos7" \
++      name="clefos/httpd-24-centos7" \
+       version="$HTTPD_VERSION" \
+       com.redhat.component="httpd24-container" \
+       usage="s2i build https://github.com/sclorg/httpd-container.git --context-dir=examples/sample-test-app/ centos/httpd-24-centos7 sample-server" \
+@@ -34,6 +34,7 @@ EXPOSE 8443
+ 
+ RUN yum install -y yum-utils && \
+     yum install -y centos-release-scl epel-release && \
++    yum-config-manager --enable epel --save && \
+     INSTALL_PKGS="gettext hostname nss_wrapper bind-utils httpd24 httpd24-mod_ssl httpd24-mod_auth_mellon" && \
+     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \

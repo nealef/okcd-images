@@ -1,0 +1,13 @@
+diff --git a/3.2/Dockerfile b/3.2/Dockerfile
+index 21f5739..727910e 100644
+--- a/3.2/Dockerfile
++++ b/3.2/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="6379:redis" \
+       io.openshift.tags="database,redis,redis32,rh-redis32" \
+       com.redhat.component="rh-redis32-container" \
+-      name="centos/redis-32-centos7" \
++      name="clefos/redis-32-centos7" \
+       version="3.2" \
+       usage="docker run -d --name redis_database -p 6379:6379 centos/redis-32-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"

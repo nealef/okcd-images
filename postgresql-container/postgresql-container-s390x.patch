@@ -1,0 +1,46 @@
+diff --git a/specs/multispec.yml b/specs/multispec.yml
+index bed4ae3..8dd2e3c 100644
+--- a/specs/multispec.yml
++++ b/specs/multispec.yml
+@@ -6,13 +6,10 @@ specs:
+       distros:
+         - centos-7-x86_64
+       s2i_base: centos/s2i-core-centos7
+-      org: "centos"
++      org: "clefos"
+       prod: "centos7"
+       repo_enable_reason: ""
+       environment_setup: yum install -y centos-release-scl-rh && \
+-      staging_repo_setup: >-4
+-              yum-config-manager --add-repo https://cbs.centos.org/repos/sclo7-rh-postgresql96-rh-candidate/x86_64/os/ && \
+-              echo gpgcheck=0 >> /etc/yum.repos.d/cbs.centos.org_repos_sclo7-rh-postgresql96-rh-candidate_x86_64_os_.repo && \
+     rhel7:
+        distros:
+          - rhel-7-x86_64
+@@ -33,7 +30,7 @@ specs:
+       version: "9.5"
+       prev_version: "9.4"
+       short: "95"
+-      pkgs: "rh-postgresql95 rh-postgresql95-postgresql-contrib rh-postgresql94-postgresql-server"
++      pkgs: "rh-postgresql95 rh-postgresql95-postgresql-contrib rh-postgresql95-postgresql-server"
+       enabled_collection: "rh-postgresql95"
+       openshift_tags: "database,postgresql,postgresql95,rh-postgresql95"
+       redhat_component: "rh-postgresql95-container"
+@@ -45,7 +42,7 @@ specs:
+       version: "9.6"
+       prev_version: "9.5"
+       short: "96"
+-      pkgs: "rh-postgresql96 rh-postgresql96-postgresql-contrib rh-postgresql95-postgresql-server"
++      pkgs: "rh-postgresql96 rh-postgresql96-postgresql-contrib rh-postgresql96-postgresql-server"
+       enabled_collection: "rh-postgresql96"
+       openshift_tags: "database,postgresql,postgresql96,rh-postgresql96"
+       redhat_component: "rh-postgresql96-container"
+@@ -57,7 +54,7 @@ specs:
+       version: "10"
+       prev_version: "9.6"
+       short: "10"
+-      pkgs: "rh-postgresql10 rh-postgresql10-postgresql-contrib rh-postgresql96-postgresql-server"
++      pkgs: "rh-postgresql10 rh-postgresql10-postgresql-contrib rh-postgresql10-postgresql-server"
+       enabled_collection: "rh-postgresql10"
+       openshift_tags: "database,postgresql,postgresql10,rh-postgresql10"
+       redhat_component: "rh-postgresql10-container"

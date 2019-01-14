@@ -1,0 +1,306 @@
+diff --git a/10.0/Dockerfile b/10.0/Dockerfile
+index 7a90e39..20136e0 100644
+--- a/10.0/Dockerfile
++++ b/10.0/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 10.0.0 Final
+ 
+-FROM openshift/base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=10.0.0.Final \
+-    MAVEN_VERSION=3.3.9
++    MAVEN_VERSION=3.3.9 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 10.0.0.Final" \
+       io.k8s.display-name="WildFly 10.0.0.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly10" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly 10
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/10.1/Dockerfile b/10.1/Dockerfile
+index 2241954..d3889e2 100644
+--- a/10.1/Dockerfile
++++ b/10.1/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 10.1.0 Final
+ 
+-FROM openshift/base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=10.1.0.Final \
+-    MAVEN_VERSION=3.3.9
++    MAVEN_VERSION=3.3.9 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 10.1.0.Final" \
+       io.k8s.display-name="WildFly 10.1.0.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly10" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly 10
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/11.0/Dockerfile b/11.0/Dockerfile
+index b58f443..f61eb3c 100644
+--- a/11.0/Dockerfile
++++ b/11.0/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 11.0.0 Final
+ 
+-FROM centos/s2i-base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=11.0.0.Final \
+-    MAVEN_VERSION=3.5.4
++    MAVEN_VERSION=3.5.4 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 11.0.0.Final" \
+       io.k8s.display-name="WildFly 11.0.0.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly11" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/12.0/Dockerfile b/12.0/Dockerfile
+index 1229e01..57cbfc2 100644
+--- a/12.0/Dockerfile
++++ b/12.0/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 12.0.0 Final
+ 
+-FROM centos/s2i-base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=12.0.0.Final \
+-    MAVEN_VERSION=3.5.4
++    MAVEN_VERSION=3.5.4 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 12.0.0.Final" \
+       io.k8s.display-name="WildFly 12.0.0.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly12" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/13.0/Dockerfile b/13.0/Dockerfile
+index 0bdc0ac..e06045f 100644
+--- a/13.0/Dockerfile
++++ b/13.0/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 13.0.0 Final
+ 
+-FROM centos/s2i-base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=13.0.0.Final \
+-    MAVEN_VERSION=3.5.4
++    MAVEN_VERSION=3.5.4 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 13.0.0.Final" \
+       io.k8s.display-name="WildFly 13.0.0.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly13" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/14.0/Dockerfile b/14.0/Dockerfile
+index a1e5142..bdb31f8 100644
+--- a/14.0/Dockerfile
++++ b/14.0/Dockerfile
+@@ -1,14 +1,15 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 14.0.1 Final
+ 
+-FROM centos/s2i-base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=14.0.1.Final \
+-    MAVEN_VERSION=3.5.4
++    MAVEN_VERSION=3.5.4 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 14.0.1.Final" \
+       io.k8s.display-name="WildFly 14.0.1.Final" \
+@@ -16,12 +17,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly14" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/8.1/Dockerfile b/8.1/Dockerfile
+index 636f12f..0f29dc7 100644
+--- a/8.1/Dockerfile
++++ b/8.1/Dockerfile
+@@ -1,7 +1,7 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 8.1.
+ 
+-FROM openshift/base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+@@ -9,7 +9,8 @@ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=8.1 \
+     WILDFLY_VERSION_BIN=8.1.0.Final \
+-    MAVEN_VERSION=3.3.9
++    MAVEN_VERSION=3.3.9 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 8.1" \
+       io.k8s.display-name="WildFly 8.1" \
+@@ -17,12 +18,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly81" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com>"
+ 
+ # Install Maven, Wildfly 8
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+diff --git a/9.0/Dockerfile b/9.0/Dockerfile
+index db48f1d..d9d44e8 100644
+--- a/9.0/Dockerfile
++++ b/9.0/Dockerfile
+@@ -1,7 +1,7 @@
+ # This image provides a base for building and running WildFly applications.
+ # It builds using maven and runs the resulting artifacts on WildFly 9.0
+ 
+-FROM openshift/base-centos7
++FROM clefos/ibmjava:8-sdk
+ 
+ MAINTAINER Ben Parees <bparees@redhat.com>
+ 
+@@ -9,7 +9,8 @@ EXPOSE 8080
+ 
+ ENV WILDFLY_VERSION=9.0.2 \
+     WILDFLY_VERSION_BIN=9.0.2.Final \
+-    MAVEN_VERSION=3.3.9
++    MAVEN_VERSION=3.3.9 \
++    STI_SCRIPTS_PATH=/usr/libexec/s2i
+ 
+ LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 9.0" \
+       io.k8s.display-name="WildFly 9.0" \
+@@ -17,12 +18,13 @@ LABEL io.k8s.description="Platform for building and running JEE applications on
+       io.openshift.tags="builder,wildfly,wildfly90" \
+       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
+       io.openshift.s2i.destination="/opt/s2i/destination" \
++      io.openshift.s2i.scripts-url="/usr/libexec/s2i" \
+       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
+       maintainer="Ben Parees <bparees@redhat.com"
+ 
+ # Install Maven, Wildfly 9
+-RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
++RUN INSTALL_PKGS="tar unzip bc which lsof" && \
++    yum install -y $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y && \
+     (curl -v https://www.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \

@@ -1,0 +1,39 @@
+diff --git a/2.3/Dockerfile b/2.3/Dockerfile
+index 0fd6f66..893117f 100644
+--- a/2.3/Dockerfile
++++ b/2.3/Dockerfile
+@@ -21,7 +21,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,ruby,ruby23,rh-ruby23" \
+       com.redhat.component="rh-ruby23-container" \
+-      name="centos/ruby-23-centos7" \
++      name="clefos/ruby-23-centos7" \
+       version="2.3" \
+       usage="s2i build https://github.com/sclorg/s2i-ruby-container.git --context-dir=2.4/test/puma-test-app/ centos/ruby-23-centos7 ruby-sample-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/2.4/Dockerfile b/2.4/Dockerfile
+index c646674..2071fcf 100644
+--- a/2.4/Dockerfile
++++ b/2.4/Dockerfile
+@@ -21,7 +21,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,ruby,ruby24,rh-ruby24" \
+       com.redhat.component="rh-ruby24-container" \
+-      name="centos/ruby-24-centos7" \
++      name="clefos/ruby-24-centos7" \
+       version="2.4" \
+       usage="s2i build https://github.com/sclorg/s2i-ruby-container.git --context-dir=2.4/test/puma-test-app/ centos/ruby-24-centos7 ruby-sample-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/2.5/Dockerfile b/2.5/Dockerfile
+index 58c5eeb..bc7cfc6 100644
+--- a/2.5/Dockerfile
++++ b/2.5/Dockerfile
+@@ -12,7 +12,7 @@ ENV RUBY_VERSION="${RUBY_MAJOR_VERSION}.${RUBY_MINOR_VERSION}" \
+     RUBY_SCL_NAME_VERSION="${RUBY_MAJOR_VERSION}${RUBY_MINOR_VERSION}"
+ 
+ ENV RUBY_SCL="rh-ruby${RUBY_SCL_NAME_VERSION}" \
+-    IMAGE_NAME="centos/ruby-${RUBY_SCL_NAME_VERSION}-centos7" \
++    IMAGE_NAME="clefos/ruby-${RUBY_SCL_NAME_VERSION}-centos7" \
+     SUMMARY="Platform for building and running Ruby $RUBY_VERSION applications" \
+     DESCRIPTION="Ruby $RUBY_VERSION available as container is a base platform for \
+ building and running various Ruby $RUBY_VERSION applications and frameworks. \

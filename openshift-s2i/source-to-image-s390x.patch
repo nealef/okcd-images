@@ -1,0 +1,21 @@
+diff --git a/hack/test-go.sh b/hack/test-go.sh
+index a61bc51..e56bf77 100755
+--- a/hack/test-go.sh
++++ b/hack/test-go.sh
+@@ -26,7 +26,15 @@ find_test_dirs() {
+     \) -name '*_test.go' -print0 | xargs -0n1 dirname | sort -u | xargs -n1 printf "${S2I_GO_PACKAGE}/%s\n"
+ }
+ 
+-S2I_RACE=${S2I_RACE--race}
++arch=`uname -p`
++case ${arch} in
++    s390x)
++	S2I_RACE=""
++	;;
++    *)
++	S2I_RACE=${S2I_RACE--race}
++	;;
++esac
+ S2I_COVER=${S2I_COVER--cover}
+ S2I_TIMEOUT=${S2I_TIMEOUT--timeout 60s}
+ 

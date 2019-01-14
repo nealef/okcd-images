@@ -1,0 +1,79 @@
+diff --git a/Dockerfile b/Dockerfile
+index 29aa4d2..d0a6ec1 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -23,7 +23,7 @@
+ #   centos:7
+ 
+ 
+-FROM centos:7
++FROM clefos/clefos:latest
+ 
+ MAINTAINER Leo Wu <leow@ca.ibm.com>
+ 
+@@ -33,7 +33,8 @@ MAINTAINER Leo Wu <leow@ca.ibm.com>
+ #
+ ###############################################################
+ 
+-RUN groupadd db2iadm1 && useradd -G db2iadm1 db2inst1
++RUN groupadd db2iadm1 && useradd -g db2iadm1 -c "DB2 Instance" -m db2inst1
++
+ 
+ # Required packages
+ RUN yum install -y \
+@@ -41,12 +42,14 @@ RUN yum install -y \
+     sudo \
+     passwd \
+     pam \
+-    pam.i686 \
+-    ncurses-libs.i686 \
++    pam.s390 \
++    ncurses-libs.s390 \
+     file \
+     libaio \
+-    libstdc++-devel.i686 \
++    libstdc++-devel.s390 \
+     numactl-libs \
++    tar \
++    binutils \
+     which \
+     && yum clean all
+ 
+@@ -59,24 +62,28 @@ ENV DB2EXPRESSC_DATADIR /home/db2inst1/data
+ #    2) Then upload it to a cloud storage like AWS S3 or IBM SoftLayer Object Storage
+ #    3) Acquire a URL and SHA-256 hash of file and pass it via Docker's build time argument facility
+ ARG DB2EXPRESSC_URL
+-ARG DB2EXPRESSC_SHA256
++
++COPY db2server.rsp /tmp
+ 
+ RUN curl -fSLo /tmp/expc.tar.gz $DB2EXPRESSC_URL \
+-    && echo "$DB2EXPRESSC_SHA256 /tmp/expc.tar.gz" | sha256sum -c - \
+-    && cd /tmp && tar xf expc.tar.gz \
+-    && su - db2inst1 -c "/tmp/expc/db2_install -y -b /home/db2inst1/sqllib" \
+-    && echo '. /home/db2inst1/sqllib/db2profile' >> /home/db2inst1/.bash_profile \
+-    && rm -rf /tmp/db2* && rm -rf /tmp/expc* \
+-    && sed -ri  's/(ENABLE_OS_AUTHENTICATION=).*/\1YES/g' /home/db2inst1/sqllib/instance/db2rfe.cfg \
++    && cd /tmp && tar -xf expc.tar.gz 
++
++RUN su -c "/tmp/server_dec/db2setup -r /tmp/db2server.rsp" - db2inst1 \
++    && echo '. /home/db2inst1/sqllib/db2profile' >> /home/db2inst1/.bash_profile 
++
++RUN sed -ri  's/(ENABLE_OS_AUTHENTICATION=).*/\1YES/g' /home/db2inst1/sqllib/instance/db2rfe.cfg \
+     && sed -ri  's/(RESERVE_REMOTE_CONNECTION=).*/\1YES/g' /home/db2inst1/sqllib/instance/db2rfe.cfg \
+     && sed -ri 's/^\*(SVCENAME=db2c_db2inst1)/\1/g' /home/db2inst1/sqllib/instance/db2rfe.cfg \
+     && sed -ri 's/^\*(SVCEPORT)=48000/\1=50000/g' /home/db2inst1/sqllib/instance/db2rfe.cfg \
+-    && mkdir $DB2EXPRESSC_DATADIR && chown db2inst1.db2iadm1 $DB2EXPRESSC_DATADIR
++    && /bin/su -c "/home/db2inst1/sqllib/adm/db2licm -a /tmp/server_dec/db2/license/db2dec.lic" - db2inst1 \
++    && /bin/su -c "/home/db2inst1/sqllib/adm/db2licm -a /tmp/server_dec/db2/license/db2ese.lic" - db2inst1 \
++    && mkdir $DB2EXPRESSC_DATADIR && chown db2inst1.db2iadm1 $DB2EXPRESSC_DATADIR && chown -R db2inst1.db2iadm1 /home/db2inst1
+ 
+ RUN su - db2inst1 -c "db2start && db2set DB2COMM=TCPIP && db2 UPDATE DBM CFG USING DFTDBPATH $DB2EXPRESSC_DATADIR IMMEDIATE && db2 create database db2inst1" \
+     && su - db2inst1 -c "db2stop force" \
+     && cd /home/db2inst1/sqllib/instance \
+-    && ./db2rfe -f ./db2rfe.cfg
++    && ./db2rfe -f ./db2rfe.cfg \
++    && rm -rf /tmp/db2* /tmp/expc* /tmp/server_dec
+ 
+ COPY docker-entrypoint.sh /entrypoint.sh
+ ENTRYPOINT ["/entrypoint.sh"]

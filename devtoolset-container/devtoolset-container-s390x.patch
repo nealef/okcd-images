@@ -1,0 +1,110 @@
+diff --git a/6-perftools/Dockerfile b/6-perftools/Dockerfile
+index 01808ee..7ad3f41 100644
+--- a/6-perftools/Dockerfile
++++ b/6-perftools/Dockerfile
+@@ -2,10 +2,10 @@ FROM centos/s2i-core-centos7
+ LABEL MAINTAINER Red Hat, Inc.
+ 
+ ENV SUMMARY="Red Hat Developer Toolset 6 Performance Tools container image" \
+-    DESCRIPTION="Performance tools: systemtap, valgrind, dyninst, elfutils, oprofile"
++    DESCRIPTION="Performance tools: systemtap, valgrind, elfutils, oprofile"
+ 
+ LABEL com.redhat.component="devtoolset-6-perftools-container" \
+-      name="centos/devtoolset-6-perftools-centos7" \
++      name="clefos/devtoolset-6-perftools-centos7" \
+       version="6" \
+       summary="$SUMMARY" \
+       description="$DESCRIPTION" \
+@@ -15,7 +15,7 @@ LABEL com.redhat.component="devtoolset-6-perftools-container" \
+       usage="docker run -ti -v /bin:/host:ro centos/devtoolset-6-perftools-centos7 eu-objdump -d /host/<binary>"
+ 
+ RUN yum install -y centos-release-scl-rh && \
+-    INSTALL_PKGS="devtoolset-6-systemtap devtoolset-6-valgrind devtoolset-6-dyninst devtoolset-6-dyninst-devel devtoolset-6-elfutils devtoolset-6-elfutils-devel devtoolset-6-oprofile devtoolset-6-oprofile-jit devtoolset-6-oprofile-devel" && \
++    INSTALL_PKGS="devtoolset-6-systemtap devtoolset-6-valgrind devtoolset-6-elfutils devtoolset-6-elfutils-devel devtoolset-6-oprofile devtoolset-6-oprofile-jit devtoolset-6-oprofile-devel" && \
+     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y
+diff --git a/6-perftools/test/run b/6-perftools/test/run
+index 9cbecb8..75f18a9 100755
+--- a/6-perftools/test/run
++++ b/6-perftools/test/run
+@@ -81,10 +81,26 @@ function test_sanity_valgrind_run () {
+ function test_sanity_eu_objdump_run () {
+   info "Testing 'eu-objdump /foo/ls' usage ..."
+ 
++set -x
+   docker run --rm -v /bin:/foo:ro $IMAGE_NAME eu-objdump -d /foo/ls &> $TMPDIR/actual-objdump
++cat $TMPDIR/actual-objdump
++set +x
+   check_result "Exit code is zero" $? 0
+ 
+-  grep 'Disassembly of section' $TMPDIR/actual-objdump &> /dev/null && grep 'movzbl' $TMPDIR/actual-objdump &> /dev/null
++  case `uname -p` in
++     x86_64)
++  	grep 'Disassembly of section' $TMPDIR/actual-objdump &> /dev/null && grep 'movzbl' $TMPDIR/actual-objdump &> /dev/null
++	;;
++     i386)
++  	grep 'Disassembly of section' $TMPDIR/actual-objdump &> /dev/null && grep 'movzbl' $TMPDIR/actual-objdump &> /dev/null
++	;;
++     s390x)
++  	grep 'Disassembly of section' $TMPDIR/actual-objdump &> /dev/null && grep 'stmg' $TMPDIR/actual-objdump &> /dev/null
++	;;
++     *)
++	false
++	;;
++  esac
+   check_result "Output contains disassembled code" $? 0
+ }
+ 
+diff --git a/6-toolchain/Dockerfile b/6-toolchain/Dockerfile
+index 6279b0e..341f2a0 100644
+--- a/6-toolchain/Dockerfile
++++ b/6-toolchain/Dockerfile
+@@ -12,7 +12,7 @@ toolchain can then also be deployed and run on multiple versions of \
+ Red Hat Enterprise Linux."
+ 
+ LABEL com.redhat.component="devtoolset-6-toolchain-container" \
+-      name="centos/devtoolset-6-toolchain-centos7" \
++      name="clefos/devtoolset-6-toolchain-centos7" \
+       version="6" \
+       summary="$SUMMARY" \
+       description="$DESCRIPTION" \
+diff --git a/7-perftools/Dockerfile b/7-perftools/Dockerfile
+index 90a5131..26f0d57 100644
+--- a/7-perftools/Dockerfile
++++ b/7-perftools/Dockerfile
+@@ -2,10 +2,10 @@ FROM centos/s2i-core-centos7
+ LABEL MAINTAINER Red Hat, Inc.
+ 
+ ENV SUMMARY="Red Hat Developer Toolset 7 Performance Tools container image" \
+-    DESCRIPTION="Performance tools: systemtap, valgrind, dyninst, elfutils, oprofile"
++    DESCRIPTION="Performance tools: systemtap, valgrind, elfutils, oprofile"
+ 
+ LABEL com.redhat.component="devtoolset-7-perftools-container" \
+-      name="centos/devtoolset-7-perftools-centos7" \
++      name="clefos/devtoolset-7-perftools-centos7" \
+       version="7" \
+       summary="$SUMMARY" \
+       description="$DESCRIPTION" \
+@@ -15,7 +15,7 @@ LABEL com.redhat.component="devtoolset-7-perftools-container" \
+       usage="docker run -ti -v /bin:/host:ro centos/devtoolset-7-perftools-centos7 eu-objdump -d /host/<binary>"
+ 
+ RUN yum install -y centos-release-scl-rh && \
+-    INSTALL_PKGS="devtoolset-7-systemtap devtoolset-7-valgrind devtoolset-7-dyninst devtoolset-7-dyninst-devel devtoolset-7-elfutils devtoolset-7-elfutils-devel devtoolset-7-oprofile devtoolset-7-oprofile-jit devtoolset-7-oprofile-devel" && \
++    INSTALL_PKGS="devtoolset-7-systemtap devtoolset-7-valgrind devtoolset-7-elfutils devtoolset-7-elfutils-devel devtoolset-7-oprofile devtoolset-7-oprofile-jit devtoolset-7-oprofile-devel" && \
+     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     yum clean all -y
+diff --git a/7-toolchain/Dockerfile b/7-toolchain/Dockerfile
+index 9fe8402..d0476da 100644
+--- a/7-toolchain/Dockerfile
++++ b/7-toolchain/Dockerfile
+@@ -12,7 +12,7 @@ toolchain can then also be deployed and run on multiple versions of \
+ Red Hat Enterprise Linux."
+ 
+ LABEL com.redhat.component="devtoolset-7-toolchain-container" \
+-      name="centos/devtoolset-7-toolchain-centos7" \
++      name="clefos/devtoolset-7-toolchain-centos7" \
+       version="7" \
+       summary="$SUMMARY" \
+       description="$DESCRIPTION" \

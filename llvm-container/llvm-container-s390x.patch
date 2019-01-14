@@ -1,0 +1,13 @@
+diff --git a/7/Dockerfile b/7/Dockerfile
+index 90c3ac0..6524352 100644
+--- a/7/Dockerfile
++++ b/7/Dockerfile
+@@ -12,7 +12,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,llvm,clang" \
+       com.redhat.component="llvm-toolset-7-docker" \
+-      name="centos/llvm-toolset-7-centos7" \
++      name="clefos/llvm-toolset-7-centos7" \
+       version="5.0.1" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+ 

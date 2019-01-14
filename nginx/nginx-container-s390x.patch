@@ -1,0 +1,52 @@
+diff --git a/1.10/Dockerfile b/1.10/Dockerfile
+index ec44298..b2773d0 100644
+--- a/1.10/Dockerfile
++++ b/1.10/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="${SUMMARY}" \
+       io.openshift.expose-services="8443:https" \
+       io.openshift.tags="builder,${NAME},rh-${NAME}${NGINX_SHORT_VER}" \
+       com.redhat.component="rh-${NAME}${NGINX_SHORT_VER}-container" \
+-      name="centos/${NAME}-${NGINX_SHORT_VER}-centos7" \
++      name="clefos/${NAME}-${NGINX_SHORT_VER}-centos7" \
+       version="${NGINX_VERSION}" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+       help="For more information visit https://github.com/sclorg/${NAME}-container" \
+diff --git a/1.12/Dockerfile b/1.12/Dockerfile
+index 146793b..d5cd9aa 100644
+--- a/1.12/Dockerfile
++++ b/1.12/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="${SUMMARY}" \
+       io.openshift.expose-services="8443:https" \
+       io.openshift.tags="builder,${NAME},rh-${NAME}${NGINX_SHORT_VER}" \
+       com.redhat.component="rh-${NAME}${NGINX_SHORT_VER}-container" \
+-      name="centos/${NAME}-${NGINX_SHORT_VER}-centos7" \
++      name="clefos/${NAME}-${NGINX_SHORT_VER}-centos7" \
+       version="${NGINX_VERSION}" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+       help="For more information visit https://github.com/sclorg/${NAME}-container" \
+diff --git a/1.6/Dockerfile b/1.6/Dockerfile
+index ce8c239..c7c0b96 100644
+--- a/1.6/Dockerfile
++++ b/1.6/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="443:https" \
+       io.openshift.tags="builder,nginx,nginx16" \
+       com.redhat.component="rh-nginx16-docker" \
+-      name="centos/nginx-16-centos7" \
++      name="clefos/nginx-16-centos7" \
+       version="1.6" \
+       release="1"
+ 
+diff --git a/1.8/Dockerfile b/1.8/Dockerfile
+index 59828b5..d044558 100644
+--- a/1.8/Dockerfile
++++ b/1.8/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="${SUMMARY}" \
+       io.openshift.expose-services="8443:https" \
+       io.openshift.tags="builder,${NAME},rh-${NAME}${NGINX_SHORT_VER}" \
+       com.redhat.component="rh-${NAME}${NGINX_SHORT_VER}-container" \
+-      name="centos/${NAME}-${NGINX_SHORT_VER}-centos7" \
++      name="clefos/${NAME}-${NGINX_SHORT_VER}-centos7" \
+       version="${NGINX_VERSION}" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+       help="For more information visit https://github.com/sclorg/${NAME}-container" \

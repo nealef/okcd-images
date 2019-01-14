@@ -1,0 +1,26 @@
+diff --git a/5.7/Dockerfile b/5.7/Dockerfile
+index 1f1ab21..69eeef6 100644
+--- a/5.7/Dockerfile
++++ b/5.7/Dockerfile
+@@ -27,7 +27,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="3306:mysql" \
+       io.openshift.tags="database,mysql,mysql57,rh-mysql57" \
+       com.redhat.component="rh-mysql57-container" \
+-      name="centos/mysql-57-centos7" \
++      name="clefos/mysql-57-centos7" \
+       version="5.7" \
+       usage="docker run -d -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 centos/mysql-57-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/8.0/Dockerfile b/8.0/Dockerfile
+index 210c18d..d541405 100644
+--- a/8.0/Dockerfile
++++ b/8.0/Dockerfile
+@@ -27,7 +27,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="3306:mysql" \
+       io.openshift.tags="database,mysql,mysql80,rh-mysql80" \
+       com.redhat.component="rh-mysql80-container" \
+-      name="centos/mysql-80-centos7" \
++      name="clefos/mysql-80-centos7" \
+       version="8.0" \
+       usage="docker run -d -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 centos/mysql-80-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"

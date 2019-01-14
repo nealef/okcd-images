@@ -1,0 +1,13 @@
+diff --git a/1.10/Dockerfile b/1.10/Dockerfile
+index f11568f..2f4e1ea 100644
+--- a/1.10/Dockerfile
++++ b/1.10/Dockerfile
+@@ -15,7 +15,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.display-name="Go $VERSION" \
+       io.openshift.tags="builder,golang,golang18,rh-golang18,go" \
+       com.redhat.component="go-toolset-7" \
+-      name="centos/go-toolset-7-centos7" \
++      name="clefos/go-toolset-7-centos7" \
+       version="1" \
+       maintainer="Jakub Čajka <jcajka@redhat.com>" \
+       usage="docker run centos/go-toolset-7-centos7"

@@ -1,0 +1,36 @@
+diff --git a/Dockerfile b/Dockerfile
+index ec637d0..2e088e5 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,6 +1,4 @@
+-ARG BG_IMAGE_TAG
+-FROM nodeshift/centos7-s2i-nodejs:${BG_IMAGE_TAG}
+-# This image provides a Node.JS environment you can use to build your Modern Web Applications
++FROM clefos/nodejs-8-centos7
+ 
+ EXPOSE 8080
+ 
+diff --git a/Makefile b/Makefile
+index 2f4743b..3f14130 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,8 +3,8 @@
+ # other than the README.md file.
+ include versions.mk
+ 
+-FROM=nodeshift/centos7-s2i-nodejs:${BG_IMAGE_TAG}
+-IMAGE_NAME=nodeshift/centos7-s2i-web-app
++FROM=clefos/nodejs-8-centos7:${BG_IMAGE_TAG}
++IMAGE_NAME=clefos/s2i-web-app
+ 
+ TARGET=$(IMAGE_NAME):$(IMAGE_TAG)
+ 
+@@ -33,7 +33,6 @@ tag:
+ 	docker tag $(TARGET) $(IMAGE_NAME):$(IMAGE_TAG)
+ 
+ .PHONY: publish
+-publish: all
+-	echo $(DOCKER_PASS) | docker login -u $(DOCKER_USER) --password-stdin
++publish: 
+ 	docker push $(TARGET)
+ 	if [ ! -z $(LTS_TAG) ]; then docker push $(IMAGE_NAME):$(LTS_TAG); fi

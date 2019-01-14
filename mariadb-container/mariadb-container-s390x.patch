@@ -1,0 +1,39 @@
+diff --git a/10.0/Dockerfile b/10.0/Dockerfile
+index 261c20f..34b4b39 100644
+--- a/10.0/Dockerfile
++++ b/10.0/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="3306:mysql" \
+       io.openshift.tags="database,mysql,mariadb,mariadb100,rh-mariadb100" \
+       com.redhat.component="rh-mariadb100-docker" \
+-      name="centos/mariadb-100-centos7" \
++      name="clefos/mariadb-100-centos7" \
+       version="10.0" \
+       usage="docker run -d -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 centos/mariadb-100-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/10.1/Dockerfile b/10.1/Dockerfile
+index f72d033..2c93793 100644
+--- a/10.1/Dockerfile
++++ b/10.1/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="3306:mysql" \
+       io.openshift.tags="database,mysql,mariadb,mariadb101,rh-mariadb101,galera" \
+       com.redhat.component="rh-mariadb101-container" \
+-      name="centos/mariadb-101-centos7" \
++      name="clefos/mariadb-101-centos7" \
+       version="10.1" \
+       usage="docker run -d -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 centos/mariadb-101-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+diff --git a/10.2/Dockerfile b/10.2/Dockerfile
+index 7ea1251..e1427e4 100644
+--- a/10.2/Dockerfile
++++ b/10.2/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="3306:mysql" \
+       io.openshift.tags="database,mysql,mariadb,mariadb102,rh-mariadb102,galera" \
+       com.redhat.component="rh-mariadb102-container" \
+-      name="centos/mariadb-102-centos7" \
++      name="clefos/mariadb-102-centos7" \
+       usage="docker run -d -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 centos/mariadb-102-centos7" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+ 

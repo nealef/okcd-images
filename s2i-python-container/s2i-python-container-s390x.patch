@@ -1,0 +1,66 @@
+diff --git a/2.7/Dockerfile b/2.7/Dockerfile
+index 6be4bbf..8ab97c3 100644
+--- a/2.7/Dockerfile
++++ b/2.7/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,python,python27,rh-python27" \
+       com.redhat.component="python27-container" \
+-      name="centos/python-27-centos7" \
++      name="clefos/python-27-centos7" \
+       version="2.7" \
+       usage="s2i build https://github.com/sclorg/s2i-python-container.git --context-dir=2.7/test/setup-test-app/ centos/python-27-centos7 python-sample-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+@@ -38,7 +38,7 @@ RUN INSTALL_PKGS="libjpeg-turbo libjpeg-turbo-devel python27 python27-python-dev
+         httpd24-mod_auth_kerb httpd24-mod_ldap httpd24-mod_session atlas-devel gcc-gfortran \
+         libffi-devel libtool-ltdl enchant" && \
+     yum install -y centos-release-scl && \
+-    yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
++    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     # Remove centos-logos (httpd dependency) to keep image size smaller.
+     rpm -e --nodeps centos-logos && \
+diff --git a/3.5/Dockerfile b/3.5/Dockerfile
+index 31d4603..fe307fe 100644
+--- a/3.5/Dockerfile
++++ b/3.5/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,python,python35,rh-python35" \
+       com.redhat.component="python35-container" \
+-      name="centos/python-35-centos7" \
++      name="clefos/python-35-centos7" \
+       version="3.5" \
+       usage="s2i build https://github.com/sclorg/s2i-python-container.git --context-dir=3.5/test/setup-test-app/ centos/python-35-centos7 python-sample-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+@@ -37,7 +37,7 @@ RUN INSTALL_PKGS="rh-python35 rh-python35-python-devel rh-python35-python-setupt
+         httpd24 httpd24-httpd-devel httpd24-mod_ssl httpd24-mod_auth_kerb httpd24-mod_ldap \
+         httpd24-mod_session atlas-devel gcc-gfortran libffi-devel libtool-ltdl enchant" && \
+     yum install -y centos-release-scl && \
+-    yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
++    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     # Remove centos-logos (httpd dependency) to keep image size smaller.
+     rpm -e --nodeps centos-logos && \
+diff --git a/3.6/Dockerfile b/3.6/Dockerfile
+index 7785735..cece972 100644
+--- a/3.6/Dockerfile
++++ b/3.6/Dockerfile
+@@ -28,7 +28,7 @@ LABEL summary="$SUMMARY" \
+       io.openshift.expose-services="8080:http" \
+       io.openshift.tags="builder,python,python36,rh-python36" \
+       com.redhat.component="python36-container" \
+-      name="centos/python-36-centos7" \
++      name="clefos/python-36-centos7" \
+       version="1" \
+       usage="s2i build https://github.com/sclorg/s2i-python-container.git --context-dir=3.6/test/setup-test-app/ centos/python-36-centos7 python-sample-app" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
+@@ -37,7 +37,7 @@ RUN INSTALL_PKGS="rh-python36 rh-python36-python-devel rh-python36-python-setupt
+         httpd24 httpd24-httpd-devel httpd24-mod_ssl httpd24-mod_auth_kerb httpd24-mod_ldap \
+         httpd24-mod_session atlas-devel gcc-gfortran libffi-devel libtool-ltdl enchant" && \
+     yum install -y centos-release-scl && \
+-    yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
++    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
+     rpm -V $INSTALL_PKGS && \
+     # Remove centos-logos (httpd dependency) to keep image size smaller.
+     rpm -e --nodeps centos-logos && \

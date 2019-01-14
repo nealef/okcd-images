@@ -1,0 +1,26 @@
+diff --git a/7.0/Dockerfile b/7.0/Dockerfile
+index 67ae4f1..7276806 100644
+--- a/7.0/Dockerfile
++++ b/7.0/Dockerfile
+@@ -33,7 +33,7 @@ LABEL summary="${SUMMARY}" \
+       io.openshift.tags="builder,${NAME},${NAME}${PHP_VER_SHORT},rh-${NAME}${PHP_VER_SHORT}" \
+       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
+       io.s2i.scripts-url="image:///usr/libexec/s2i" \
+-      name="centos/${NAME}-${PHP_VER_SHORT}-centos7" \
++      name="clefos/${NAME}-${PHP_VER_SHORT}-centos7" \
+       com.redhat.component="rh-${NAME}${PHP_VER_SHORT}-container" \
+       version="${PHP_VERSION}" \
+       help="For more information visit https://github.com/sclorg/s2i-${NAME}-container" \
+diff --git a/7.1/Dockerfile b/7.1/Dockerfile
+index 7006fea..c40c3dc 100644
+--- a/7.1/Dockerfile
++++ b/7.1/Dockerfile
+@@ -33,7 +33,7 @@ LABEL summary="${SUMMARY}" \
+       io.openshift.tags="builder,${NAME},${NAME}${PHP_VER_SHORT},rh-${NAME}${PHP_VER_SHORT}" \
+       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
+       io.s2i.scripts-url="image:///usr/libexec/s2i" \
+-      name="centos/${NAME}-${PHP_VER_SHORT}-centos7" \
++      name="clefos/${NAME}-${PHP_VER_SHORT}-centos7" \
+       com.redhat.component="rh-${NAME}${PHP_VER_SHORT}-container" \
+       version="${PHP_VERSION}" \
+       help="For more information visit https://github.com/sclorg/s2i-${NAME}-container" \

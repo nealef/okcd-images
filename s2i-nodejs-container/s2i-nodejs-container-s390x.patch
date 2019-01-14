@@ -1,0 +1,26 @@
+diff --git a/6/Dockerfile b/6/Dockerfile
+index aae0435..2f01bf5 100644
+--- a/6/Dockerfile
++++ b/6/Dockerfile
+@@ -42,7 +42,7 @@ LABEL summary="$SUMMARY" \
+       com.redhat.deployments-dir="${APP_ROOT}/src" \
+       com.redhat.dev-mode.port="DEBUG_PORT:5858"\
+       com.redhat.component="rh-$NAME$NODEJS_VERSION-container" \
+-      name="centos/$NAME-$NODEJS_VERSION-centos7" \
++      name="clefos/$NAME-$NODEJS_VERSION-centos7" \
+       version="$NODEJS_VERSION" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+       help="For more information visit https://github.com/sclorg/s2i-nodejs-container" \
+diff --git a/8/Dockerfile b/8/Dockerfile
+index c364dfe..a50d169 100644
+--- a/8/Dockerfile
++++ b/8/Dockerfile
+@@ -42,7 +42,7 @@ LABEL summary="$SUMMARY" \
+       com.redhat.deployments-dir="${APP_ROOT}/src" \
+       com.redhat.dev-mode.port="DEBUG_PORT:5858"\
+       com.redhat.component="rh-$NAME$NODEJS_VERSION-container" \
+-      name="centos/$NAME-$NODEJS_VERSION-centos7" \
++      name="clefos/$NAME-$NODEJS_VERSION-centos7" \
+       version="$NODEJS_VERSION" \
+       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
+       help="For more information visit https://github.com/sclorg/s2i-nodejs-container" \
