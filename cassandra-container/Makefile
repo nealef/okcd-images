@@ -1,6 +1,6 @@
 all:	cassandra-container
 
-postgresql-container:
+cassandra-container:
 	git clone https://github.com/sclorg/cassandra-container.git
 	cd cassandra-container ; \
 	git submodule update --init ; \
