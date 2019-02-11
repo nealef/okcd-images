@@ -1,0 +1,21 @@
+diff --git a/7/Dockerfile b/7/Dockerfile
+index 528d28d..833bd49 100644
+--- a/7/Dockerfile
++++ b/7/Dockerfile
+@@ -1,4 +1,4 @@
+-FROM centos:centos7
++FROM clefos/rust-container
+ 
+ ENV SUMMARY="Red Hat Rust Toolset 7 container image" \
+   DESCRIPTION="Platform for building applications using Red Hat Rust Toolset 7"
+@@ -12,8 +12,8 @@ LABEL com.redhat.component="rust-toolset-7-docker" \
+   io.k8s.display-name="Rust Toolset 7"
+ 
+ RUN yum install -y yum-utils && \
+-  yum install -y centos-release-scl && \
+-  yum-config-manager --enable centos-sclo-rh-testing && \
++  yum install -y clefos-release-scl && \
++  yum-config-manager --enable clefos-sclo-rh-testing && \
+   INSTALL_PKGS="rust-toolset-7" && \
+   yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+   rpm -V $INSTALL_PKGS && \
