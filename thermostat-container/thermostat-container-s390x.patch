@@ -1,0 +1,38 @@
+diff --git a/1-agent/Dockerfile b/1-agent/Dockerfile
+index 7149fdb..bdcd7f8 100644
+--- a/1-agent/Dockerfile
++++ b/1-agent/Dockerfile
+@@ -23,7 +23,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.description="$SUMMARY" \
+       io.k8s.display-name="Thermostat Agent 1.4" \
+       com.redhat.component="thermostat1-agent-docker" \
+-      name="centos/thermostat-1-agent-centos7" \
++      name="clefos/thermostat-1-agent-centos7" \
+       version="1.4" \
+       release="1"
+ 
+diff --git a/16-agent/Dockerfile b/16-agent/Dockerfile
+index a38cff8..52d286d 100644
+--- a/16-agent/Dockerfile
++++ b/16-agent/Dockerfile
+@@ -21,7 +21,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.description="$DESCRIPTION" \
+       io.k8s.display-name="Thermostat Agent 1.6" \
+       com.redhat.component="rh-thermostat16-agent-docker" \
+-      name="centos/thermostat-16-agent-centos7" \
++      name="clefos/thermostat-16-agent-centos7" \
+       version="1.6" \
+       release="1"
+ 
+diff --git a/16-storage/Dockerfile b/16-storage/Dockerfile
+index e67b375..9c2a12b 100644
+--- a/16-storage/Dockerfile
++++ b/16-storage/Dockerfile
+@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
+       io.k8s.description="$DESCRIPTION" \
+       io.k8s.display-name="Thermostat Storage 1.6" \
+       com.redhat.component="rh-thermostat16-storage-docker" \
+-      name="centos/thermostat-16-storage-centos7" \
++      name="clefos/thermostat-16-storage-centos7" \
+       version="1.6" \
+       release="1"
